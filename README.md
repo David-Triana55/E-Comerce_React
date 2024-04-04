@@ -15,7 +15,9 @@ Este proyecto es una tienda online desarrollada con React.js que aprovecha una A
 - **React.js:** El frontend de la aplicación está desarrollado utilizando React.js.
 - **Context API:** Se utiliza la Context API de React para administrar el estado global de la aplicación, incluyendo el carrito de compras y el historial de pedidos.
 - **React Router:** Se utiliza React Router para gestionar la navegación entre las diferentes páginas de la aplicación.
-- https://david-triana55.github.io/E-Comerce_React/
 
+
+- **Adjunto enlace de aplicación:**
+  - https://david-triana55.github.io/React/
 
 
