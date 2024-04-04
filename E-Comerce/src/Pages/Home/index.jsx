@@ -6,9 +6,7 @@ import { ShoppingCartContext } from "../../Context"
 
 function Home(){
     const context = useContext(ShoppingCartContext)
-    
-    const currentPath = window.location.pathname
-    let index = currentPath.substring(currentPath.lastIndexOf('/') + 1)
+
 
     const renderView = () => {
         if (context.filteredItems?.length > 0) {
