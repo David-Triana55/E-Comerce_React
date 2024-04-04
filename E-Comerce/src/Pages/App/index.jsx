@@ -3,8 +3,6 @@ import { ShoppingCartProvider } from '../../Context'
 import Home from '../Home/'
 import MyOrder from '../MyOrder/'
 import MyOrders from '../MyOrders/'
-import NotFound from '../NotFound/'
-import SignIn from '../SignIn/'
 import { Navbar } from '../../Components/Navbar'
 import './App.css'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
@@ -21,8 +19,7 @@ const AppRoutes = () => {
         { path: '/my-orders', element: <MyOrders/> },
         { path: '/my-orders/last', element: <MyOrder/> },
         { path: '/my-orders/:id', element: <MyOrder/> },
-        { path: '/sign-in', element: <SignIn/> },
-        { path: '/*', element: <NotFound/> },
+        { path: '/*', element: <Home/> },
 
     ])
     return routes

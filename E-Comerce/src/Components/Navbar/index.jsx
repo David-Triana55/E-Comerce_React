@@ -13,7 +13,7 @@ const Navbar = ()=> {
         <nav className="bg-white flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-md font-light">
             <ul className="flex items-center gap-3">
                 <li className="font-semibold text-lg">
-                    <NavLink to='/All'>
+                    <NavLink to='/'>
                         Shopi
                     </NavLink>
                 </li>
@@ -91,17 +91,7 @@ const Navbar = ()=> {
                     <NavLink to='/my-orders'>
                         My orders
                     </NavLink>
-                </li>
-                <li>
-                    <NavLink 
-                    to='/sign-in'
-                    className={({isActive}) =>
-                    isActive ? activeStyle: undefined
-                    }>
-                        Sign In
-                    </NavLink>
-                </li>
-                
+                </li>                
                 <li className='flex items-center'>
                     <ShoppingBagIcon className='h-6'/>    
                     {context.count}
