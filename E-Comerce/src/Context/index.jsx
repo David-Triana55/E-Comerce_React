@@ -2,7 +2,41 @@ import { createContext, useState, useEffect } from "react";
 
 export const ShoppingCartContext = createContext()
 
+
+export const initializelocalStorage = () => {
+    const accountInLocalStorage = localStorage.getItem('account')
+    const signOutInLocalStorage = localStorage.getItem('sign-out')
+
+    let parsedAccount
+    let parsedSignOut
+
+    if(!accountInLocalStorage){
+        parsedAccount = {}
+        localStorage.setItem('account', JSON.stringify(parsedAccount))
+    } else {
+        parsedAccount = JSON.parse(accountInLocalStorage)
+    }
+
+
+    if(!signOutInLocalStorage){
+        parsedSignOut = false
+        localStorage.setItem('account', JSON.stringify(parsedSignOut))
+    } else {
+        parsedSignOut = JSON.parse(signOutInLocalStorage)
+    }
+    
+
+}
+
+
 export const ShoppingCartProvider = ({children}) => {
+
+    // My Account
+    const [account, setAccount] = useState({})
+
+    // Sign Out
+    const [signOut , setSignOut] = useState(false)
+
     // Shopping Cart * Increment quality
     const [count, setCount] = useState(0)
 
@@ -11,7 +45,7 @@ export const ShoppingCartProvider = ({children}) => {
     const openProductDetail = () => setIsOpenProductDetail(true)
     const closeProductDetail = () => setIsOpenProductDetail(false)
     
-    // Product Detail * Open/Close
+    // Product checkout * Open/Close
     const [isOpenCheckoutSideMenu, setIsOpenCheckoutSideMenu] = useState(false)
     const openCheckoutSideMenu = () => setIsOpenCheckoutSideMenu(true)
     const closeCheckoutSideMenu = () => setIsOpenCheckoutSideMenu(false)
@@ -125,7 +159,11 @@ export const ShoppingCartProvider = ({children}) => {
                 setSearchByTitle,
                 filteredItems,
                 searchByCategory,
-                setSearchByCategory
+                setSearchByCategory,
+                account,
+                setAccount,
+                signOut,
+                setSignOut
         
             }}
         >

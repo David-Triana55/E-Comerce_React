@@ -8,12 +8,85 @@ const Navbar = ()=> {
 
     const context = useContext(ShoppingCartContext)
 
+    const openShop = () => {
+        context.setIsOpenCheckoutSideMenu(prev => !prev)
+    }
+
+    const signOut = localStorage.getItem('sign-out')
+    const parsedSignOut = JSON.parse(signOut)
+    const isUserSignOut = context.signOut || parsedSignOut
+
+    // Account
+    const account = localStorage.getItem('account')
+    const parsedAccount = JSON.parse(account)
+    // Has an account
+    const noAccountInLocalStorage = parsedAccount ? Object.keys(parsedAccount).length === 0 : true
+    const noAccountInLocalState = context.account ? Object.keys(context.account).length === 0 : true
+    const hasUserAnAccount = !noAccountInLocalStorage || !noAccountInLocalState
+
+    const handleSignOut = () => {
+        const stringifySignOut = JSON.stringify(true)
+        localStorage.setItem('sign-out', stringifySignOut)
+        context.setSignOut(true)
+
+    }
+
+    const renderView = () => {
+        if(hasUserAnAccount && !isUserSignOut){
+            return(
+                <>
+                    <li className="text-black/60">
+                        {parsedAccount?.email}
+                    </li>
+                    <li>
+                        <NavLink 
+                            to='/my-orders'
+                            className={({isActive}) =>isActive ? activeStyle: undefined}
+                        >
+                            My orders
+                        </NavLink>
+                    </li>            
+                    <li>
+                        <NavLink 
+                            to='/my-account'
+                            className={({isActive}) =>isActive ? activeStyle: undefined}
+                            >
+                            My Account
+                        </NavLink>
+                    </li>    
+                    <li>
+                        <NavLink 
+                            to='/sign-in' 
+                            onClick={handleSignOut}
+                            className={({isActive}) =>isActive ? activeStyle: undefined}
+                        >
+                            Sign out
+                        </NavLink>
+                    </li>    
+                </>
+            )
+        } else {
+            return (
+                <li>
+                    <NavLink 
+                        to='/sign-in' 
+                        onClick={handleSignOut}
+                        className={({isActive}) => isActive ? activeStyle : undefined }
+                    >
+                        Sign out
+                    </NavLink>
+                </li>
+            )
+        }
+    }
+
+    console.log(context.signOut);
     const activeStyle = 'underline underline-offset-4'
     return (
         <nav className="bg-white flex justify-between items-center fixed top-0 z-10 w-full py-5 px-8 text-md font-light">
             <ul className="flex items-center gap-3">
                 <li className="font-semibold text-lg">
-                    <NavLink to='/'>
+                    <NavLink to={`${isUserSignOut ? '/sign-in' : '/'}`}>
                         Shopi
                     </NavLink>
                 </li>
@@ -21,8 +94,7 @@ const Navbar = ()=> {
                     <NavLink 
                     to='/' 
                     onClick={() => context.setSearchByCategory(null)}
-                    className={({isActive}) =>
-                    isActive ? activeStyle: undefined
+                    className={({isActive}) =>isActive ? activeStyle: undefined
                     }>
                         All
                     </NavLink>
@@ -82,24 +154,16 @@ const Navbar = ()=> {
                     </NavLink>
                 </li>
             </ul>
-
             <ul className="flex items-center gap-3">
-                <li className="text-black/60">
-                    DavidTriana976@gmail.com
-                </li>
-                <li>
-                    <NavLink to='/my-orders'>
-                        My orders
-                    </NavLink>
-                </li>                
-                <li className='flex items-center'>
-                    <ShoppingBagIcon className='h-6'/>    
-                    {context.count}
-                </li>
-
-            
+                {renderView()}
+                <li className='flex items-center relative'>
+                        <ShoppingBagIcon 
+                            className='h-6 cursor-pointer'
+                            onClick={openShop}
+                        />    
+                        <span >{context.cartProducts.length}</span>
+                    </li>
             </ul>
-
         </nav>
     )
 }
