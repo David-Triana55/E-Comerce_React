@@ -81,9 +81,9 @@ function MyAccount() {
                     />
                 </div>
                 <button
-                className='bg-black text-white w-full rounded-lg py-3'
-                onClick={() => {setView('user-info'), editAccount()}}>
-                Edit
+                    className='bg-black text-white w-full rounded-lg py-3'
+                    onClick={() => {setView('user-info'), editAccount()}}>
+                        Edit
                 </button>
             </form>
         )
