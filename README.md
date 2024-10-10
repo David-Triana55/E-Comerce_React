@@ -16,6 +16,6 @@ Este proyecto es una tienda online desarrollada con React.js que aprovecha una A
 
 
 - **Adjunto enlace de aplicación:**
-  - https://david-triana55.github.io/React/
+  - [https://david-triana55.github.io/React/](https://david-triana55.github.io/E-Comerce_React/)
 
 
